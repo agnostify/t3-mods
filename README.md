@@ -45,18 +45,21 @@ T3 themes are CSS only, capped at 50,000 characters, with images allowed only as
 
 Those hooks aren't a promised API, so a T3 update can quietly switch a mood off. What can break, and how to check, is in [cube-city/breakage.md](cube-city/breakage.md).
 
-### Building it yourself
+### Extra: remix the cubes
 
-The built themes are in `cube-city/out/`. Rebuilding needs Agnostify's cube drawing kit (`cube-kit.js` and `cast.js`), which isn't in this repo:
+The cube drawing kit is included as an extra. `cube-city/kit/cube-kit.js` draws a cube from a few settings, and `cube-city/kit/cast.js` holds the whole Agnostify cast: Cubsy, Maya and Nora, plus the crew and content teams. Change a cube's colour, eyes (size, lids, brows, happy arcs), tilt or accessory, then rebuild:
 
 ```bash
 cd cube-city
-CUBE_KIT=/path/to/kit node build.mjs   # writes out/cube-city.json and out/cube-city-calm.json
-node harness.mjs                       # writes out/harness.html, a stand-in T3 page for checking every mood
+node build.mjs     # writes out/cube-city.json and out/cube-city-calm.json
+node harness.mjs   # writes out/harness.html, a stand-in T3 page for checking every mood
+t3 theme set out/cube-city.json
 ```
+
+If you use the battery helper, run `sh power/install.sh` again after a rebuild so it picks up the new files.
 
 `tools/` has the screenshot and CPU scripts used to check it (they need `playwright-core` and Google Chrome).
 
 ## License
 
-The code is MIT licensed, see [LICENSE](LICENSE). The Agnostify name and the cube characters (Cubsy, Maya and Nora, and their look) are Agnostify's and aren't covered by that license.
+The code is MIT licensed, see [LICENSE](LICENSE). The Agnostify name and the cube characters (their names and look, including the cast in `cube-city/kit`) are Agnostify's and aren't covered by that license.

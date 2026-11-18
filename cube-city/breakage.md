@@ -16,7 +16,7 @@
 - Check: screenshot the window; if missing, make that wrapper transparent in the CSS.
 
 ## Cube look drifts from the approved kit
-- Risk: cubes are drawn by Agnostify's `cube-kit.js` at build time (not in this repo; `CUBE_KIT` points at it). A kit change only reaches the theme after a rebuild and reinstall.
+- Risk: cubes are drawn by `kit/cube-kit.js`, a copy of Agnostify's kit. A change to the original kit only reaches this repo when it's copied in again, then rebuilt and reinstalled.
 - Check: rebuild, then `sh power/install.sh` (or `t3 theme set out/cube-city.json`).
 
 ## Theme file written directly

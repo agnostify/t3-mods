@@ -1,5 +1,5 @@
 // Builds the Agnostify cube-city backdrop for T3 Code as one theme CSS file.
-// Run: CUBE_KIT=<kit folder> node build.mjs  ->  out/cube-city.json and out/cube-city-calm.json (T3 theme files),
+// Run: node build.mjs  ->  out/cube-city.json and out/cube-city-calm.json (T3 theme files),
 //      out/theme.css and out/theme-calm.css (the same CSS alone), out/*.svg (to eyeball)
 // Look: node harness.mjs, then open out/harness.html (?dark&busy&typing&done&failed&panel) in Chrome.
 // Publish: t3 theme set out/cube-city.json (or sh power/install.sh for the battery switch). Undo: t3 theme set t3-chat.
@@ -14,10 +14,9 @@ import path from 'node:path'
 import vm from 'node:vm'
 
 const HERE = path.dirname(new URL(import.meta.url).pathname)
-// The cube drawing kit (cube-kit.js and cast.js) is Agnostify's and is not in this repo; point CUBE_KIT at a folder
-// that has it. The built themes in out/ work without it.
-const KIT = process.env.CUBE_KIT
-if (!KIT || !fs.existsSync(`${KIT}/cube-kit.js`)) throw new Error('Set CUBE_KIT to the folder with cube-kit.js and cast.js. Prebuilt themes are in out/.')
+// The cube drawing kit: kit/cube-kit.js draws a cube, kit/cast.js holds the cast. CUBE_KIT points somewhere else.
+const KIT = process.env.CUBE_KIT || path.join(path.dirname(new URL(import.meta.url).pathname), 'kit')
+if (!fs.existsSync(`${KIT}/cube-kit.js`)) throw new Error(`No cube-kit.js in ${KIT}`)
 vm.runInThisContext(fs.readFileSync(`${KIT}/cube-kit.js`, 'utf8'))
 vm.runInThisContext(fs.readFileSync(`${KIT}/cast.js`, 'utf8'))
 const { CubeKit, CUBE_CAST } = globalThis
