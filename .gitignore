@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+cube-city/out/*.svg
+cube-city/out/harness.html
+cube-city/out/shots/*
+!cube-city/out/shots/moods.png
+cube-city/out/perf-*.html
+cube-city/out/theme-v1.css
+cube-city/node_modules
+cube-city/tools/node_modules
